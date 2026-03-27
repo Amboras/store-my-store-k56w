@@ -1,20 +1,30 @@
-.PHONY: help install dev build clean
+.PHONY: help install dev dev-turbo dev-prod build start clean
 
 help:
 	@echo "Available commands:"
-	@echo "  make install  - Install storefront dependencies"
-	@echo "  make dev      - Start storefront dev server"
-	@echo "  make build    - Build storefront for production"
-	@echo "  make clean    - Remove node_modules and .next"
+	@echo "  make install    - Install storefront dependencies"
+	@echo "  make dev        - Start storefront dev server with Turbopack (FAST)"
+	@echo "  make dev-prod   - Run production build locally (FASTEST - like Fly.io)"
+	@echo "  make build      - Build storefront for production"
+	@echo "  make start      - Start production server (requires build first)"
+	@echo "  make clean      - Remove node_modules and .next"
 
 install:
 	cd storefront && npm install
 
+# Fast dev mode with Turbopack (5-10x faster than webpack)
 dev:
 	cd storefront && npm run dev
 
+# Production build + start locally (fastest, like Fly.io)
+dev-prod:
+	cd storefront && npm run dev:prod
+
 build:
 	cd storefront && npm run build
+
+start:
+	cd storefront && npm run start
 
 clean:
 	rm -rf storefront/node_modules storefront/.next

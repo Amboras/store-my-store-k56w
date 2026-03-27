@@ -8,6 +8,7 @@ import { useCheckout, CheckoutStep, ShippingAddress } from '@/hooks/use-checkout
 import { ShoppingBag, ChevronRight, Loader2, Check, ArrowLeft, AlertCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import { StripePaymentForm } from '@/components/checkout/stripe-payment-form'
+import { getProductImage } from '@/lib/utils/placeholder-images'
 
 const steps: { key: CheckoutStep; label: string }[] = [
   { key: 'info', label: 'Information' },
@@ -338,13 +339,12 @@ export default function CheckoutPage() {
                     {cart?.items?.map((item: any) => (
                       <div key={item.id} className="flex gap-3">
                         <div className="relative h-16 w-14 flex-shrink-0 overflow-hidden bg-muted rounded-sm">
-                          {item.thumbnail ? (
-                            <Image src={item.thumbnail} alt={item.title} fill className="object-cover" />
-                          ) : (
-                            <div className="flex h-full items-center justify-center text-muted-foreground/30">
-                              <ShoppingBag className="h-4 w-4" />
-                            </div>
-                          )}
+                          <Image
+                            src={getProductImage(item.thumbnail, item.product_id || item.id)}
+                            alt={item.title}
+                            fill
+                            className="object-cover"
+                          />
                           <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[9px] font-bold text-background">
                             {item.quantity}
                           </span>

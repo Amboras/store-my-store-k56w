@@ -64,7 +64,7 @@ export function useCart() {
         throw error
       }
     },
-    staleTime: 0,
+    staleTime: 60000, // Cache cart data for 60 seconds
   })
 
   // CORRECT: Use createLineItem (not addLineItem)

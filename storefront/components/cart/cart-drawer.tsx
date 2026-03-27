@@ -4,6 +4,7 @@ import { useCart } from '@/hooks/use-cart'
 import Image from 'next/image'
 import Link from 'next/link'
 import { X, ShoppingBag, Minus, Plus, Trash2 } from 'lucide-react'
+import { getProductImage } from '@/lib/utils/placeholder-images'
 
 interface CartDrawerProps {
   isOpen: boolean
@@ -83,18 +84,12 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   <div key={item.id} className="flex gap-4">
                     {/* Product Image */}
                     <div className="relative h-28 w-22 flex-shrink-0 overflow-hidden rounded bg-muted">
-                      {item.thumbnail ? (
-                        <Image
-                          src={item.thumbnail}
-                          alt={item.title}
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="flex h-full w-20 items-center justify-center text-muted-foreground/40">
-                          <ShoppingBag className="h-6 w-6" />
-                        </div>
-                      )}
+                      <Image
+                        src={getProductImage(item.thumbnail, item.product_id || item.id)}
+                        alt={item.title}
+                        fill
+                        className="object-cover"
+                      />
                     </div>
 
                     {/* Product Info */}

@@ -15,6 +15,31 @@ const nextConfig = {
       },
     ],
   },
+  // Performance optimizations
+  experimental: {
+    // Use Turbopack for faster dev builds (5-10x faster)
+    turbo: {
+      rules: {},
+    },
+    // Optimize package imports
+    optimizePackageImports: ['lucide-react', '@tanstack/react-query'],
+  },
+  // Faster incremental builds
+  typescript: {
+    // Type check in parallel (faster builds)
+    tsconfigPath: './tsconfig.json',
+  },
+  // Optimize webpack in dev (fallback when not using Turbopack)
+  webpack: (config, { dev, isServer }) => {
+    if (dev) {
+      // Faster rebuilds in dev
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+      }
+    }
+    return config
+  },
 }
 
 export default nextConfig

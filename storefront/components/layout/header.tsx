@@ -49,7 +49,7 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-8">
-              <Link href="/products" className="text-sm tracking-wide uppercase link-underline py-1">
+              <Link href="/products" className="text-sm tracking-wide uppercase link-underline py-1" prefetch={true}>
                 Shop All
               </Link>
               {collections?.slice(0, 4).map((collection: any) => (
@@ -57,6 +57,7 @@ export default function Header() {
                   key={collection.id}
                   href={`/collections/${collection.handle}`}
                   className="text-sm tracking-wide uppercase link-underline py-1"
+                  prefetch={true}
                 >
                   {collection.title}
                 </Link>
@@ -119,6 +120,7 @@ export default function Header() {
                 href="/products"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block py-3 text-lg tracking-wide border-b border-border/50"
+                prefetch={true}
               >
                 Shop All
               </Link>
@@ -128,6 +130,7 @@ export default function Header() {
                   href={`/collections/${collection.handle}`}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block py-3 text-lg tracking-wide border-b border-border/50"
+                  prefetch={true}
                 >
                   {collection.title}
                 </Link>

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ImageIcon } from 'lucide-react'
+import { getProductImage } from '@/lib/utils/placeholder-images'
 
 interface ProductCardProps {
   product: any
@@ -20,23 +20,17 @@ export default function ProductCard({ product }: ProductCardProps) {
     : null
 
   return (
-    <Link href={`/products/${product.handle}`} className="group block">
+    <Link href={`/products/${product.handle}`} className="group block" prefetch={true}>
       <div className="space-y-3">
         {/* Product Image */}
         <div className="relative aspect-[3/4] overflow-hidden bg-muted rounded-sm">
-          {product.thumbnail ? (
-            <Image
-              src={product.thumbnail}
-              alt={product.title}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center text-muted-foreground/30">
-              <ImageIcon className="h-10 w-10" strokeWidth={1} />
-            </div>
-          )}
+          <Image
+            src={getProductImage(product.thumbnail, product.id)}
+            alt={product.title}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          />
         </div>
 
         {/* Product Info */}

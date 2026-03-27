@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ArrowRight, Truck, Shield, RotateCcw } from 'lucide-react'
 import CollectionSection from '@/components/marketing/collection-section'
 import { useCollections } from '@/hooks/use-collections'
+import { HERO_PLACEHOLDER, LIFESTYLE_PLACEHOLDER } from '@/lib/utils/placeholder-images'
 
 export default function HomePage() {
   const { data: collections, isLoading } = useCollections()
@@ -29,6 +30,7 @@ export default function HomePage() {
               <Link
                 href="/products"
                 className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-3.5 text-sm font-semibold uppercase tracking-wide hover:opacity-90 transition-opacity"
+                prefetch={true}
               >
                 Shop Now
                 <ArrowRight className="h-4 w-4" />
@@ -36,22 +38,23 @@ export default function HomePage() {
               <Link
                 href="/about"
                 className="inline-flex items-center gap-2 border border-foreground px-8 py-3.5 text-sm font-semibold uppercase tracking-wide hover:bg-foreground hover:text-background transition-colors"
+                prefetch={true}
               >
                 Our Story
               </Link>
             </div>
           </div>
 
-          {/* Hero Image Placeholder */}
+          {/* Hero Image */}
           <div className="relative aspect-[4/5] lg:aspect-[3/4] bg-muted rounded-sm overflow-hidden animate-fade-in">
-            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/30">
-              <div className="text-center">
-                <div className="w-24 h-24 mx-auto border-2 border-dashed border-current rounded-full flex items-center justify-center mb-4">
-                  <span className="text-3xl font-heading">S</span>
-                </div>
-                <p className="text-sm">Hero Image</p>
-              </div>
-            </div>
+            <Image
+              src={HERO_PLACEHOLDER}
+              alt="Hero - New Collection"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover"
+              priority
+            />
           </div>
         </div>
       </section>
@@ -88,9 +91,13 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="aspect-[4/5] bg-muted rounded-sm overflow-hidden relative">
-              <div className="absolute inset-0 flex items-center justify-center text-muted-foreground/30">
-                <p className="text-sm">Lifestyle Image</p>
-              </div>
+              <Image
+                src={LIFESTYLE_PLACEHOLDER}
+                alt="Lifestyle - Our Philosophy"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
             </div>
             <div className="space-y-6 lg:max-w-md">
               <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Our Philosophy</p>
@@ -104,6 +111,7 @@ export default function HomePage() {
               <Link
                 href="/about"
                 className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide link-underline pb-0.5"
+                prefetch={true}
               >
                 Learn More
                 <ArrowRight className="h-4 w-4" />

@@ -2,9 +2,10 @@ import { notFound } from 'next/navigation'
 import { medusaClient } from '@/lib/medusa-client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ImageIcon, Truck, RotateCcw, Shield, ChevronRight } from 'lucide-react'
+import { Truck, RotateCcw, Shield, ChevronRight } from 'lucide-react'
 import ProductActions from '@/components/product/product-actions'
 import ProductAccordion from '@/components/product/product-accordion'
+import { getProductPlaceholder } from '@/lib/utils/placeholder-images'
 
 async function getProduct(handle: string) {
   try {
@@ -41,6 +42,11 @@ export default async function ProductPage({
     ...(product.images || []).filter((img: any) => img.url !== product.thumbnail),
   ]
 
+  // Use placeholder if no images
+  const displayImages = allImages.length > 0
+    ? allImages
+    : [{ url: getProductPlaceholder(product.id) }]
+
   return (
     <>
       {/* Breadcrumbs */}
@@ -61,25 +67,19 @@ export default async function ProductPage({
           {/* Product Images */}
           <div className="space-y-3">
             <div className="relative aspect-[3/4] overflow-hidden bg-muted rounded-sm">
-              {allImages[0]?.url ? (
-                <Image
-                  src={allImages[0].url}
-                  alt={product.title}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center text-muted-foreground/30">
-                  <ImageIcon className="h-16 w-16" strokeWidth={1} />
-                </div>
-              )}
+              <Image
+                src={displayImages[0].url}
+                alt={product.title}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
             </div>
 
-            {allImages.length > 1 && (
+            {displayImages.length > 1 && (
               <div className="grid grid-cols-4 gap-3">
-                {allImages.slice(1, 5).map((image: any, idx: number) => (
+                {displayImages.slice(1, 5).map((image: any, idx: number) => (
                   <div
                     key={idx}
                     className="relative aspect-[3/4] overflow-hidden bg-muted rounded-sm"

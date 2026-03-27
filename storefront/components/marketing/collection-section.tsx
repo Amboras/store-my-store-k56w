@@ -31,6 +31,7 @@ export default function CollectionSection({ collection, alternate }: CollectionS
           <Link
             href={`/collections/${collection.handle}`}
             className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide link-underline pb-0.5 whitespace-nowrap"
+            prefetch={true}
           >
             View All
             <ArrowRight className="h-4 w-4" />
