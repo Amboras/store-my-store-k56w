@@ -81,10 +81,11 @@ export default function Header() {
             </button>
 
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-heading text-2xl font-semibold tracking-tight">
-                Store
+            <Link href="/" className="flex items-center gap-2 group">
+              <span className="font-heading text-2xl tracking-tight leading-none">
+                OFFGRID
               </span>
+              <span className="hidden sm:inline-block h-1.5 w-1.5 rounded-full bg-accent -translate-y-1.5 transition-transform group-hover:scale-125" />
             </Link>
 
             {/* Desktop Navigation */}
@@ -153,7 +154,7 @@ export default function Header() {
             className="absolute inset-y-0 left-0 w-80 max-w-[85vw] bg-background animate-slide-in-right"
           >
             <div className="flex items-center justify-between p-4 border-b">
-              <span className="font-heading text-xl font-semibold">Menu</span>
+              <span className="font-heading text-xl tracking-tight">OFFGRID</span>
               <button
                 ref={mobileMenuCloseRef}
                 onClick={() => setIsMobileMenuOpen(false)}

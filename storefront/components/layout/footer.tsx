@@ -46,13 +46,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block">
-              <span className="font-heading text-2xl font-semibold">
-                Store
-              </span>
+            <Link href="/" className="inline-flex items-center gap-2">
+              <span className="font-heading text-2xl tracking-tight">OFFGRID</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-accent -translate-y-1.5" />
             </Link>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Curated products crafted with care. Quality you can feel, design you can see.
+              Heavyweight graphic tees printed in small batches. Bold artwork, premium cotton, zero filler.
             </p>
           </div>
 
@@ -102,7 +101,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Store. All rights reserved.
+            &copy; {new Date().getFullYear()} OFFGRID. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <button
